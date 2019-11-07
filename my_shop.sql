@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2019-11-06 08:47:27
+Date: 2019-11-07 08:34:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,14 +26,15 @@ CREATE TABLE `admin` (
   `create_time` char(10) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`aid`),
   UNIQUE KEY `name` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='管理员表 \r\nusername 不能重复 录入数据需要唯一验证\r\npassword 6-20位字母数字混合 md5加密';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='管理员表 \r\nusername 不能重复 录入数据需要唯一验证\r\npassword 6-20位字母数字混合 md5加密';
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('14', 'jsys', '83445ab2fb6f7c8961e64d40ad577e9a', '1572956767');
+INSERT INTO `admin` VALUES ('14', 'jsy', '83445ab2fb6f7c8961e64d40ad577e9a', '1572956767');
 INSERT INTO `admin` VALUES ('16', 'lzb', '83445ab2fb6f7c8961e64d40ad577e9a', '1573000251');
-INSERT INTO `admin` VALUES ('18', 'zzy', '83445ab2fb6f7c8961e64d40ad577e9a', '1573000357');
+INSERT INTO `admin` VALUES ('19', 'asd', 'asdasdaseweweasdasdasdasdasdasda', '1573000251');
+INSERT INTO `admin` VALUES ('20', 'zzy', '83445ab2fb6f7c8961e64d40ad577e9a', '1573039164');
 
 -- ----------------------------
 -- Table structure for admin_role
@@ -47,8 +48,7 @@ CREATE TABLE `admin_role` (
 -- ----------------------------
 -- Records of admin_role
 -- ----------------------------
-INSERT INTO `admin_role` VALUES ('1', '1');
-INSERT INTO `admin_role` VALUES ('11', '1');
+INSERT INTO `admin_role` VALUES ('20', '3');
 
 -- ----------------------------
 -- Table structure for power
@@ -62,18 +62,18 @@ CREATE TABLE `power` (
   `pid` int(11) DEFAULT NULL COMMENT '父级id',
   `is_list` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`p_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='权限表\r\n';
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='权限表\r\n';
 
 -- ----------------------------
 -- Records of power
 -- ----------------------------
 INSERT INTO `power` VALUES ('1', '管理员管理', null, '1', '0', '1');
-INSERT INTO `power` VALUES ('2', '管理员添加', null, '1', '1', '1');
-INSERT INTO `power` VALUES ('3', '管理员列表', null, '2', '1', '1');
+INSERT INTO `power` VALUES ('2', '管理员添加', '../xy/jsyaddstaff', '1', '1', '1');
+INSERT INTO `power` VALUES ('3', '管理员列表', '../xy/jsystaff', '2', '1', '1');
 INSERT INTO `power` VALUES ('4', '管理员删除修改', null, '3', '1', '0');
 INSERT INTO `power` VALUES ('5', '角色管理', null, '2', '0', '1');
-INSERT INTO `power` VALUES ('6', '角色添加', null, '1', '5', '1');
-INSERT INTO `power` VALUES ('7', '角色列表', null, '2', '5', '1');
+INSERT INTO `power` VALUES ('6', '角色添加', '../tomato/add_role', '1', '5', '1');
+INSERT INTO `power` VALUES ('7', '角色列表', '../tomato/role_list', '2', '5', '1');
 INSERT INTO `power` VALUES ('8', '菜单管理', null, '3', '0', '1');
 INSERT INTO `power` VALUES ('9', '菜单添加', '../liu/addPower', '1', '8', '1');
 INSERT INTO `power` VALUES ('10', '菜单列表', '../liu/listPower', '2', '8', '1');
@@ -107,6 +107,8 @@ INSERT INTO `power` VALUES ('37', '品牌列表', null, '2', '35', '1');
 INSERT INTO `power` VALUES ('38', '商品分类管理', null, '9', '0', '1');
 INSERT INTO `power` VALUES ('39', '分类添加', null, '1', '38', '1');
 INSERT INTO `power` VALUES ('40', '分类列表', null, '2', '38', '1');
+INSERT INTO `power` VALUES ('42', '划水', null, '16', '0', '0');
+INSERT INTO `power` VALUES ('44', '游泳', null, '2', '42', '0');
 
 -- ----------------------------
 -- Table structure for role
@@ -116,13 +118,13 @@ CREATE TABLE `role` (
   `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `role_name` varchar(30) DEFAULT NULL COMMENT '角色名',
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表\r\nrole 代表角色名称\r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='角色表\r\nrole 代表角色名称\r\n';
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '普通管理员');
 INSERT INTO `role` VALUES ('3', '超级管理员');
+INSERT INTO `role` VALUES ('7', '希洛宸hikari');
 
 -- ----------------------------
 -- Table structure for role_power
@@ -180,3 +182,21 @@ INSERT INTO `role_power` VALUES ('3', '37');
 INSERT INTO `role_power` VALUES ('3', '38');
 INSERT INTO `role_power` VALUES ('3', '39');
 INSERT INTO `role_power` VALUES ('3', '40');
+INSERT INTO `role_power` VALUES ('5', '38');
+INSERT INTO `role_power` VALUES ('5', '39');
+INSERT INTO `role_power` VALUES ('5', '40');
+INSERT INTO `role_power` VALUES ('6', '5');
+INSERT INTO `role_power` VALUES ('6', '6');
+INSERT INTO `role_power` VALUES ('6', '7');
+INSERT INTO `role_power` VALUES ('6', '42');
+INSERT INTO `role_power` VALUES ('7', '1');
+INSERT INTO `role_power` VALUES ('7', '2');
+INSERT INTO `role_power` VALUES ('7', '3');
+INSERT INTO `role_power` VALUES ('7', '4');
+INSERT INTO `role_power` VALUES ('7', '5');
+INSERT INTO `role_power` VALUES ('7', '6');
+INSERT INTO `role_power` VALUES ('7', '7');
+INSERT INTO `role_power` VALUES ('7', '42');
+INSERT INTO `role_power` VALUES ('18', '20');
+INSERT INTO `role_power` VALUES ('19', '7');
+INSERT INTO `role_power` VALUES ('21', '11');
